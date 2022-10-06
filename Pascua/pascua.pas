@@ -24,7 +24,4 @@ begin
             WriteLn('La pascua es el ', N, ' de Marzo de ', annio);
         end;
     end;
-
-
-
 end;
