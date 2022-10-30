@@ -5,7 +5,15 @@ program MinutosSegundos;
     var segundos, minutos: word;
     
     begin
+        writeln('Ingrese los segundos:');
+        readln(segundos);
         
+        while segundos >= 60 do
+            begin
+                segundos := segundos - 60;
+                minutos  += 1;
+            end;
+        writeln('El equivalente en minutos y segundos es: ', minutos, ':', segundos, '.');
         
-        
-    end;
+        readln();
+    end.
