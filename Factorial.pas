@@ -3,7 +3,7 @@
 program Factorial;
     
     var
-    numero, multip, indicador: integer;
+    numero, multip, indicador: longint;
         
     begin
         writeln('Ingrese un número entero positivo:');
