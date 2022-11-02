@@ -1,7 +1,7 @@
 { se desea crear un array de registros con los datos de los estudiantes  }
 { de un determinado colegio. los campos de los registros son: nombre,    }
 { código, sexo, edad, curso, notas de las asignaturas del curso anterior.}
-{ a continuación, escribir un programa que lea y escriba este array, así }
+{ A continuación, escribir un programa que lea y escriba este array, así }
 { como en las opciones: ordernar por orden alfabético según nombre,      }
 { calcular la media de cada alumno y visualizar la lista de alumnos por  }
 { curso ordenador alfabéticamente según nombre.                          }
@@ -31,20 +31,20 @@ program registros;
     { VARIABLES }
     
     var
-        //alumno: datos;
+        alumno: datos;
         alumnos: array[1..10] of datos;
-        opcion, numeroAlumno: word;
+        opcion, numeroAlumno, i: word;
     
     
     { MAIN }
 
     begin
-        numeroAlumno := 1;
+        numeroAlumno := 11;
         
         repeat 
             
         writeln();    
-        writeln('Estudiantes - Colegio Santa Trinidad');
+        writeln('>>>>> Estudiantes - Colegio Santa Trinidad <<<<<');
         writeln();
         writeln('1. Ingresar nuevo alumno');
         writeln('2. Mostrar lista de alumnos');
@@ -57,8 +57,8 @@ program registros;
         case opcion of
             1:
             begin
-                if numeroAlumno = 10 then
-                    writeln('Lista de alumnos completa')
+                if numeroAlumno = 11 then
+                    writeln('Lista de alumnos completa')   
                 else
                     writeln('Ingrese el nombre del alumno ', numeroAlumno);
                     readln(alumnos[numeroAlumno].nombre);
@@ -89,8 +89,27 @@ program registros;
             
             2:
             begin
-               writeln();
-               writeln('Lista'); 
+                if numeroAlumno = 1 then
+                    begin
+                        writeln();
+                        writeln('No hay alumnos que mostrar.');
+                    end
+                else
+                for i := 1 to (numeroAlumno - 1) do
+                    begin
+                        writeln();
+                        writeln('>>>> Alumno: ', alumnos[i].nombre,' ', alumnos[i].apellido);
+                        writeln('Código: ', alumnos[i].codigo, ' - Género: ', alumnos[i].genero, ' - Edad: ', alumnos[i].edad, ' - Curso: ', alumnos[i].curso);
+                        writeln();
+                        writeln('Notas de asignaturas del curso anterior:');
+                        writeln('Ciencias Sociales: ', alumnos[i].notasAsignatura.asignatura1);
+                        writeln('Matemáticas: ', alumnos[i].notasAsignatura.asignatura2);
+                        writeln('Ciencias Naturales: ', alumnos[i].notasAsignatura.asignatura3);
+                        writeln('Arte: ', alumnos[i].notasAsignatura.asignatura4);
+                    end;
+                    
+                
+                
             end;
             
             
