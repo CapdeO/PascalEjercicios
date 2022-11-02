@@ -60,31 +60,32 @@ program registros;
                 if numeroAlumno = 11 then
                     writeln('Lista de alumnos completa')   
                 else
-                    writeln('Ingrese el nombre del alumno ', numeroAlumno);
-                    readln(alumnos[numeroAlumno].nombre);
-                    writeln('Ingrese el apellido de ', alumnos[numeroAlumno].nombre);
-                    readln(alumnos[numeroAlumno].apellido);
-                    writeln('Ingrese el código de ', alumnos[numeroAlumno].nombre, ' ', alumnos[numeroAlumno].apellido);
-                    readln(alumnos[numeroAlumno].codigo);
-                    writeln('Ingrese el género de ', alumnos[numeroAlumno].nombre, ' ', alumnos[numeroAlumno].apellido, ' (M=Masculino/F=Femenino/B=Binario/I=Indefinido)');
-                    readln(alumnos[numeroAlumno].genero);
-                    writeln('Ingrese la edad de ', alumnos[numeroAlumno].nombre, ' ', alumnos[numeroAlumno].apellido);
-                    readln(alumnos[numeroAlumno].edad);
-                    writeln('Ingrese el curso de ', alumnos[numeroAlumno].nombre, ' ', alumnos[numeroAlumno].apellido, ' (1-Primero/2-Segundo/3-Tercero)');
-                    readln(alumnos[numeroAlumno].curso);
-                    writeln('Ingrese las notas de las asignaturas del curso anterior de ', alumnos[numeroAlumno].nombre, ' ', alumnos[numeroAlumno].apellido);
-                    writeln('Ciencias Sociales: ');
-                    readln(alumnos[numeroAlumno].notasAsignatura.asignatura1);
-                    writeln('Matemáticas: ');
-                    readln(alumnos[numeroAlumno].notasAsignatura.asignatura2);
-                    writeln('Ciencias Naturales: ');
-                    readln(alumnos[numeroAlumno].notasAsignatura.asignatura3);
-                    writeln('Arte: ');
-                    readln(alumnos[numeroAlumno].notasAsignatura.asignatura4);
-                    writeln();
-                    writeln(alumnos[numeroAlumno].nombre, ' ', alumnos[numeroAlumno].apellido, ' AGREGADO CON ÉXITO!');
-                    numeroAlumno += 1;
-                 
+                begin
+                        writeln('Ingrese el nombre del alumno ', numeroAlumno);
+                        readln(alumnos[numeroAlumno].nombre);
+                        writeln('Ingrese el apellido de ', alumnos[numeroAlumno].nombre);
+                        readln(alumnos[numeroAlumno].apellido);
+                        writeln('Ingrese el código de ', alumnos[numeroAlumno].nombre, ' ', alumnos[numeroAlumno].apellido);
+                        readln(alumnos[numeroAlumno].codigo);
+                        writeln('Ingrese el género de ', alumnos[numeroAlumno].nombre, ' ', alumnos[numeroAlumno].apellido, ' (M=Masculino/F=Femenino/B=Binario/I=Indefinido)');
+                        readln(alumnos[numeroAlumno].genero);
+                        writeln('Ingrese la edad de ', alumnos[numeroAlumno].nombre, ' ', alumnos[numeroAlumno].apellido);
+                        readln(alumnos[numeroAlumno].edad);
+                        writeln('Ingrese el curso de ', alumnos[numeroAlumno].nombre, ' ', alumnos[numeroAlumno].apellido, ' (1-Primero/2-Segundo/3-Tercero)');
+                        readln(alumnos[numeroAlumno].curso);
+                        writeln('Ingrese las notas de las asignaturas del curso anterior de ', alumnos[numeroAlumno].nombre, ' ', alumnos[numeroAlumno].apellido);
+                        writeln('Ciencias Sociales: ');
+                        readln(alumnos[numeroAlumno].notasAsignatura.asignatura1);
+                        writeln('Matemáticas: ');
+                        readln(alumnos[numeroAlumno].notasAsignatura.asignatura2);
+                        writeln('Ciencias Naturales: ');
+                        readln(alumnos[numeroAlumno].notasAsignatura.asignatura3);
+                        writeln('Arte: ');
+                        readln(alumnos[numeroAlumno].notasAsignatura.asignatura4);
+                        writeln();
+                        writeln(alumnos[numeroAlumno].nombre, ' ', alumnos[numeroAlumno].apellido, ' AGREGADO CON ÉXITO!');
+                        numeroAlumno += 1;
+                end;
             end;
             
             2:
