@@ -42,18 +42,30 @@ program registros;
         
     function ordenar(a: tabla): tabla;
         var
-            r: word;
+            r, m: word;
             aux: datos;
     begin
-        for r := 1 to length(a) do
-        begin
-            if a[r].nombre > a[r+1].nombre then
-            begin
-                aux := a[r+1];
-                a[r+1] := a[r];
-                a[r] := aux;
-            end;
-        end;
+        for m := 1 to numeroalumno do
+           for r := 1 to (numeroalumno -1) do
+               if a[r].nombre > a[r+1].nombre then
+               begin
+                    aux := a[r+1];
+                    a[r+1] := a[r];
+                    a[r] := aux;
+               end;
+                
+        for i := 1 to numeroalumno do
+                      begin
+                        writeln();
+                        writeln('>>>> alumno: ', a[i].nombre,' ', a[i].apellido);
+                        writeln('código: ', a[i].codigo, ' - género: ', a[i].genero, ' - edad: ', a[i].edad, ' - curso: ', alumnos[i].curso);
+                        writeln();
+                        writeln('notas de asignaturas del curso anterior:');
+                        writeln('ciencias sociales: ', a[i].notasasignatura.asignatura1);
+                        writeln('matemáticas: ', a[i].notasasignatura.asignatura2);
+                        writeln('ciencias naturales: ', a[i].notasasignatura.asignatura3);
+                        writeln('arte: ', a[i].notasasignatura.asignatura4);
+                    end;
     end;
         
     
@@ -61,7 +73,7 @@ program registros;
     { main }
 
     begin
-        numeroalumno := 1;
+        
         
         repeat 
             
@@ -79,10 +91,11 @@ program registros;
         case opcion of
             1:
             begin
-                if numeroalumno = 11 then
+                if numeroalumno = 10 then
                     writeln('lista de alumnos completa')   
                 else
                 begin
+                    numeroalumno += 1;
                     writeln('ingrese el nombre del alumno ', numeroalumno);
                     readln(alumnos[numeroalumno].nombre);
                     writeln('ingrese el apellido de ', alumnos[numeroalumno].nombre);
@@ -106,7 +119,7 @@ program registros;
                     readln(alumnos[numeroalumno].notasasignatura.asignatura4);
                     writeln();
                     writeln(alumnos[numeroalumno].nombre, ' ', alumnos[numeroalumno].apellido, ' agregado con éxito!');
-                    numeroalumno += 1;
+                    
                 end;
                     
                  
@@ -114,25 +127,18 @@ program registros;
             
             2:
             begin
-                ordenar(alumnos);
-                if numeroalumno = 1 then
+                
+                if numeroalumno = 0 then
                     begin
                         writeln();
                         writeln('no hay alumnos que mostrar.');
                     end
                 else
-                for i := 1 to (numeroalumno - 1) do
                     begin
-                        writeln();
-                        writeln('>>>> alumno: ', alumnos[i].nombre,' ', alumnos[i].apellido);
-                        writeln('código: ', alumnos[i].codigo, ' - género: ', alumnos[i].genero, ' - edad: ', alumnos[i].edad, ' - curso: ', alumnos[i].curso);
-                        writeln();
-                        writeln('notas de asignaturas del curso anterior:');
-                        writeln('ciencias sociales: ', alumnos[i].notasasignatura.asignatura1);
-                        writeln('matemáticas: ', alumnos[i].notasasignatura.asignatura2);
-                        writeln('ciencias naturales: ', alumnos[i].notasasignatura.asignatura3);
-                        writeln('arte: ', alumnos[i].notasasignatura.asignatura4);
+                      ordenar(alumnos);    
+                        
                     end;
+                    
                     
                 
                 
@@ -156,5 +162,5 @@ program registros;
             
         end;    
         until opcion = 0;
-    
+        
     end.
