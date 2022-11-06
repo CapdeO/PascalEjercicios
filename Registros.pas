@@ -1,7 +1,7 @@
 { se desea crear un array de registros con los datos de los estudiantes  }
 { de un determinado colegio. los campos de los registros son: nombre,    }
 { código, sexo, edad, curso, notas de las asignaturas del curso anterior.}
-{ A continuación, escribir un programa que lea y escriba este array, así }
+{ a continuación, escribir un programa que lea y escriba este array, así }
 { como en las opciones: ordernar por orden alfabético según nombre,      }
 { calcular la media de cada alumno y visualizar la lista de alumnos por  }
 { curso ordenador alfabéticamente según nombre.                          }
@@ -9,7 +9,7 @@
 
 program registros;
     
-    { TIPOS PERSONALIZADOS }
+    { tipos personalizados }
     
     type
     
@@ -20,7 +20,7 @@ program registros;
         genero: string[1];
         edad: word;
         curso: string[1];
-        notasAsignatura: record
+        notasasignatura: record
             asignatura1: word;
             asignatura2: word;
             asignatura3: word;
@@ -28,85 +28,110 @@ program registros;
         end;
     end;
     
-    { VARIABLES }
+    tabla = array[1..10] of datos;
+        
+    { variables }
     
     var
         alumno: datos;
-        alumnos: array[1..10] of datos;
-        opcion, numeroAlumno, i: word;
+        alumnos: tabla;
+        opcion, numeroalumno, i: word;
+        
+    
+    { funciones }    
+        
+    function ordenar(a: tabla): tabla;
+        var
+            r: word;
+            aux: datos;
+    begin
+        for r := 1 to length(a) do
+        begin
+            if a[r].nombre > a[r+1].nombre then
+            begin
+                aux := a[r+1];
+                a[r+1] := a[r];
+                a[r] := aux;
+            end;
+        end;
+    end;
+        
     
     
-    { MAIN }
+    { main }
 
     begin
-        numeroAlumno := 11;
+        numeroalumno := 1;
         
         repeat 
             
         writeln();    
-        writeln('>>>>> Estudiantes - Colegio Santa Trinidad <<<<<');
+        writeln('>>>>> estudiantes - colegio santa trinidad <<<<<');
         writeln();
-        writeln('1. Ingresar nuevo alumno');
-        writeln('2. Mostrar lista de alumnos');
-        writeln('3. Mostrar promedio de cada alumno');
-        writeln('4. Lista de alumnos por curso');
-        writeln('0. Salir');
+        writeln('1. ingresar nuevo alumno');
+        writeln('2. mostrar lista de alumnos');
+        writeln('3. mostrar promedio de cada alumno');
+        writeln('4. lista de alumnos por curso');
+        writeln('0. salir');
         writeln();
         readln(opcion);
         
         case opcion of
             1:
             begin
-                if numeroAlumno = 11 then
-                    writeln('Lista de alumnos completa')   
+                if numeroalumno = 11 then
+                    writeln('lista de alumnos completa')   
                 else
                 begin
-                        writeln('Ingrese el nombre del alumno ', numeroAlumno);
-                        readln(alumnos[numeroAlumno].nombre);
-                        writeln('Ingrese el apellido de ', alumnos[numeroAlumno].nombre);
-                        readln(alumnos[numeroAlumno].apellido);
-                        writeln('Ingrese el código de ', alumnos[numeroAlumno].nombre, ' ', alumnos[numeroAlumno].apellido);
-                        readln(alumnos[numeroAlumno].codigo);
-                        writeln('Ingrese el género de ', alumnos[numeroAlumno].nombre, ' ', alumnos[numeroAlumno].apellido, ' (M=Masculino/F=Femenino/B=Binario/I=Indefinido)');
-                        readln(alumnos[numeroAlumno].genero);
-                        writeln('Ingrese la edad de ', alumnos[numeroAlumno].nombre, ' ', alumnos[numeroAlumno].apellido);
-                        readln(alumnos[numeroAlumno].edad);
-                        writeln('Ingrese el curso de ', alumnos[numeroAlumno].nombre, ' ', alumnos[numeroAlumno].apellido, ' (1-Primero/2-Segundo/3-Tercero)');
-                        readln(alumnos[numeroAlumno].curso);
-                        writeln('Ingrese las notas de las asignaturas del curso anterior de ', alumnos[numeroAlumno].nombre, ' ', alumnos[numeroAlumno].apellido);
-                        writeln('Ciencias Sociales: ');
-                        readln(alumnos[numeroAlumno].notasAsignatura.asignatura1);
-                        writeln('Matemáticas: ');
-                        readln(alumnos[numeroAlumno].notasAsignatura.asignatura2);
-                        writeln('Ciencias Naturales: ');
-                        readln(alumnos[numeroAlumno].notasAsignatura.asignatura3);
-                        writeln('Arte: ');
-                        readln(alumnos[numeroAlumno].notasAsignatura.asignatura4);
-                        writeln();
-                        writeln(alumnos[numeroAlumno].nombre, ' ', alumnos[numeroAlumno].apellido, ' AGREGADO CON ÉXITO!');
-                        numeroAlumno += 1;
+                    writeln('ingrese el nombre del alumno ', numeroalumno);
+                    readln(alumnos[numeroalumno].nombre);
+                    writeln('ingrese el apellido de ', alumnos[numeroalumno].nombre);
+                    readln(alumnos[numeroalumno].apellido);
+                    writeln('ingrese el código de ', alumnos[numeroalumno].nombre, ' ', alumnos[numeroalumno].apellido);
+                    readln(alumnos[numeroalumno].codigo);
+                    writeln('ingrese el género de ', alumnos[numeroalumno].nombre, ' ', alumnos[numeroalumno].apellido, ' (m=masculino/f=femenino/b=binario/i=indefinido)');
+                    readln(alumnos[numeroalumno].genero);
+                    writeln('ingrese la edad de ', alumnos[numeroalumno].nombre, ' ', alumnos[numeroalumno].apellido);
+                    readln(alumnos[numeroalumno].edad);
+                    writeln('ingrese el curso de ', alumnos[numeroalumno].nombre, ' ', alumnos[numeroalumno].apellido, ' (1-primero/2-segundo/3-tercero)');
+                    readln(alumnos[numeroalumno].curso);
+                    writeln('ingrese las notas de las asignaturas del curso anterior de ', alumnos[numeroalumno].nombre, ' ', alumnos[numeroalumno].apellido);
+                    writeln('ciencias sociales: ');
+                    readln(alumnos[numeroalumno].notasasignatura.asignatura1);
+                    writeln('matemáticas: ');
+                    readln(alumnos[numeroalumno].notasasignatura.asignatura2);
+                    writeln('ciencias naturales: ');
+                    readln(alumnos[numeroalumno].notasasignatura.asignatura3);
+                    writeln('arte: ');
+                    readln(alumnos[numeroalumno].notasasignatura.asignatura4);
+                    writeln();
+                    writeln(alumnos[numeroalumno].nombre, ' ', alumnos[numeroalumno].apellido, ' agregado con éxito!');
+                    numeroalumno += 1;
                 end;
+                    
+                 
             end;
             
             2:
             begin
-                if numeroAlumno = 1 then
+                ordenar(alumnos);
+                if numeroalumno = 1 then
                     begin
                         writeln();
-                        writeln('No hay alumnos que mostrar.');
+                        writeln('no hay alumnos que mostrar.');
                     end
                 else
-                for i := 1 to (numeroAlumno - 1) do
+                for i := 1 to (numeroalumno - 1) do
                     begin
                         writeln();
-                        writeln('>>>> Alumno: ', alumnos[i].nombre,' ', alumnos[i].apellido);
-                        writeln('Código: ', alumnos[i].codigo, ' - Género: ', alumnos[i].genero, ' - Edad: ', alumnos[i].edad, ' - Curso: ', alumnos[i].curso);
+                        writeln('>>>> alumno: ', alumnos[i].nombre,' ', alumnos[i].apellido);
+                        writeln('código: ', alumnos[i].codigo, ' - género: ', alumnos[i].genero, ' - edad: ', alumnos[i].edad, ' - curso: ', alumnos[i].curso);
                         writeln();
-                        writeln('Notas de asignaturas del curso anterior:');
-                        writeln('Ciencias Sociales: ', alumnos[i].notasAsignatura.asignatura1);
-                        writeln('Matemáticas: ', alumnos[i].notasAsignatura.asignatura2);
-                        writeln('Ciencias Naturales: ', alumnos[i].notasAsignatura.asignatura3);
-                        writeln('Arte: ', alumnos[i].notasAsignatura.asignatura4);
+                        writeln('notas de asignaturas del curso anterior:');
+                        writeln('ciencias sociales: ', alumnos[i].notasasignatura.asignatura1);
+                        writeln('matemáticas: ', alumnos[i].notasasignatura.asignatura2);
+                        writeln('ciencias naturales: ', alumnos[i].notasasignatura.asignatura3);
+                        writeln('arte: ', alumnos[i].notasasignatura.asignatura4);
                     end;
                     
                 
@@ -117,14 +142,14 @@ program registros;
             3:
             begin
                writeln();
-               writeln('Promedios'); 
+               writeln('promedios'); 
             end;
             
             
             4:
             begin
                 writeln();
-                writeln('Lista por curso');
+                writeln('lista por curso');
             end;
             
             
