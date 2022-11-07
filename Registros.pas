@@ -26,7 +26,7 @@ program registros;
         codigo: word;
         genero: string[1];
         edad: word;
-        curso: string[1];
+        curso: word;
         notasasignatura: notas;
         
         end;
@@ -38,7 +38,6 @@ program registros;
     { variables }
     
     var
-        alumno: datos;
         alumnos: tabla;
         opcion, numeroalumno, i, k: word;
         promedio: single;
@@ -178,8 +177,37 @@ program registros;
             
             4:
             begin
-                writeln();
-                writeln('lista por curso');
+                if numeroalumno = 0 then
+                begin
+                    writeln();
+                    writeln('no hay alumnos que mostrar');
+                end
+            else    
+                begin
+                    ordenar(alumnos);
+                    writeln('>>> Lista de alumnos por curso:');
+                    writeln();
+                    writeln('♦ Curso de Primer año ♦');
+                    for i := 1 to numeroalumno do
+                    begin
+                        if alumnos[i].curso = 1 then
+                            writeln(alumnos[i].nombre, ' ', alumnos[i].apellido);
+                    end;
+                    writeln();
+                    writeln('♦ Curso de Segundo año ♦');
+                    for i := 1 to numeroalumno do
+                    begin
+                        if alumnos[i].curso = 2 then
+                            writeln(alumnos[i].nombre, ' ', alumnos[i].apellido);
+                    end;
+                    writeln();
+                    writeln('♦ Curso de Tercer año ♦');
+                    for i := 1 to numeroalumno do
+                    begin
+                        if alumnos[i].curso = 3 then
+                            writeln(alumnos[i].nombre, ' ', alumnos[i].apellido);
+                    end;
+                end;
             end;
             
             
