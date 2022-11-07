@@ -4,7 +4,7 @@
 { a continuación, escribir un programa que lea y escriba este array, así }
 { como en las opciones: ordernar por orden alfabético según nombre,      }
 { calcular la media de cada alumno y visualizar la lista de alumnos por  }
-{ curso ordenador alfabéticamente según nombre.                          }
+{ curso ordenados alfabéticamente según nombre.                          }
 
 
 program registros;
@@ -13,6 +13,13 @@ program registros;
     
     type
     
+    notas = record
+        asignatura1: word;
+        asignatura2: word;
+        asignatura3: word;
+        asignatura4: word;
+        end;
+    
     datos = record
         nombre: string[15];
         apellido: string[15];
@@ -20,27 +27,26 @@ program registros;
         genero: string[1];
         edad: word;
         curso: string[1];
-        notasasignatura: record
-            asignatura1: word;
-            asignatura2: word;
-            asignatura3: word;
-            asignatura4: word;
+        notasasignatura: notas;
+        
         end;
-    end;
     
     tabla = array[1..10] of datos;
+    
+    
         
     { variables }
     
     var
         alumno: datos;
         alumnos: tabla;
-        opcion, numeroalumno, i: word;
+        opcion, numeroalumno, i, k: word;
+        promedio: single;
         
     
     { funciones }    
         
-    function ordenar(a: tabla): tabla;
+    function ordenar(var a: tabla): tabla;
         var
             r, m: word;
             aux: datos;
@@ -54,21 +60,13 @@ program registros;
                     a[r] := aux;
                end;
                 
-        for i := 1 to numeroalumno do
-                      begin
-                        writeln();
-                        writeln('>>>> alumno: ', a[i].nombre,' ', a[i].apellido);
-                        writeln('código: ', a[i].codigo, ' - género: ', a[i].genero, ' - edad: ', a[i].edad, ' - curso: ', alumnos[i].curso);
-                        writeln();
-                        writeln('notas de asignaturas del curso anterior:');
-                        writeln('ciencias sociales: ', a[i].notasasignatura.asignatura1);
-                        writeln('matemáticas: ', a[i].notasasignatura.asignatura2);
-                        writeln('ciencias naturales: ', a[i].notasasignatura.asignatura3);
-                        writeln('arte: ', a[i].notasasignatura.asignatura4);
-                    end;
+                
     end;
         
-    
+    function sacarpromedios(var e, r, t, y:word): single;
+    begin
+        sacarpromedios := (e + r + t + y) / 4;
+    end;
     
     { main }
 
@@ -135,7 +133,19 @@ program registros;
                     end
                 else
                     begin
-                      ordenar(alumnos);    
+                          ordenar(alumnos);
+                          for i := 1 to numeroalumno do
+                          begin
+                              writeln();
+                              writeln('>>>> alumno: ', alumnos[i].nombre,' ', alumnos[i].apellido);
+                              writeln('código: ', alumnos[i].codigo, ' - género: ', alumnos[i].genero, ' - edad: ', alumnos[i].edad, ' - curso: ', alumnos[i].curso);
+                              writeln();
+                              writeln('notas de asignaturas del curso anterior:');
+                              writeln('ciencias sociales: ', alumnos[i].notasasignatura.asignatura1);
+                              writeln('matemáticas: ', alumnos[i].notasasignatura.asignatura2);
+                              writeln('ciencias naturales: ', alumnos[i].notasasignatura.asignatura3);
+                              writeln('arte: ', alumnos[i].notasasignatura.asignatura4);
+                          end;
                         
                     end;
                     
@@ -147,8 +157,22 @@ program registros;
             
             3:
             begin
-               writeln();
-               writeln('promedios'); 
+                if numeroalumno = 0 then
+                    begin
+                        writeln();
+                        writeln('no hay alumnos para sacar promedios.');
+                    end
+                else
+                    begin
+                        for k := 1 to numeroalumno do
+                        begin
+                            promedio :=  sacarpromedios(alumnos[k].notasasignatura.asignatura1, alumnos[k].notasasignatura.asignatura2, 
+                            alumnos[k].notasasignatura.asignatura3, alumnos[k].notasasignatura.asignatura4);
+                            writeln('el promedio de notas de ', alumnos[k].nombre, ' ', alumnos[k]. apellido, ' es ', promedio:2:1);
+                        end;
+                    end;
+                
+                
             end;
             
             
