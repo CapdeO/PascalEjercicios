@@ -1,3 +1,5 @@
+{Estructura de cola estática con sus operaciones básicas}
+
 program Cola_Estatica;
  
 {------CONSTANTES------}   
@@ -6,7 +8,7 @@ const
   
 {------TIPOS PERSONALIZADOS------}     
 type
-    tipo_elemento = char;
+    tipo_elemento = char; {Este tipo se cambia dependiendo el problema}
     
     cola = record
             elemento_cola: array[1..max] of tipo_elemento;
@@ -45,7 +47,46 @@ begin
     end;
 end;
 {--------------------}
-function ver_frente(e:)
+function ver_frente(var e:tipo_elemento; var q:cola): boolean;
+begin
+    ver_frente := false;
+    if not esta_vacia(q) then
+    begin
+        e          := q.elemento_cola[q.frente];
+        ver_frente := true;
+    end;
+end;
+{--------------------}
+function eliminar_frente(var q:cola):boolean;
+var
+    x: integer;
+begin
+    eliminar_frente := false;
+    if not esta_vacia(q) then
+    begin
+        for x:= 1 to q.fondo do
+            q.elemento_cola[x] := q.elemento_cola[x+1];
+        q.fondo         := q.fondo - 1;
+        eliminar_frente := true;
+    end;
+end;
+{--------------------}
+function sacar_elemento(var e:tipo_elemento; var q:cola): boolean;
+begin
+    sacar_elemento := false;
+    if ver_frente(e,q) then
+    begin
+        eliminar_frente(q);
+        sacar_elemento := true;
+    end;
+end;
+{--------------------}
+procedure destruir_cola(var q:cola);
+begin
+    crear_cola(q);
+end;
+
+
 
 
 {------MAIN------}
