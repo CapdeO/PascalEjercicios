@@ -17,4 +17,150 @@
 { - Cuanto tiempo demoro para ser atendido en ultimo aspirante en la cola.                                      }
 
 program Cola_ejercicio1;
+
     
+    {------CONSTANTES------}   
+const
+    max = 10; {Tamaño máximo de la cola}
+  
+{------TIPOS PERSONALIZADOS------}     
+type
+    tipo_elemento = word; 
+    
+    cola = record
+            elemento_cola: array[1..max] of tipo_elemento;
+            frente, fondo: 0..max;
+        end; 
+    
+{------VARIABLES------} 
+var
+    adm_A, adm_B, fila: cola;
+    nro, asp, minutos, ultimo, cont_A, cont_B, x: tipo_elemento;
+     
+{------FUNCIONES------} 
+procedure crear_cola(var q:cola);
+begin
+    q.frente := 1;
+    q.fondo  := 0; {si es cero está vacía}
+end;
+{--------------------}
+function esta_vacia(q:cola): boolean;
+begin
+    esta_vacia := q.fondo = 0;
+end;
+{--------------------}
+function esta_llena(q:cola): boolean;
+begin
+    esta_llena := q.fondo = max;
+end;
+{--------------------}
+function agregar_elemento(e: tipo_elemento; var q:cola): boolean;
+begin
+    agregar_elemento := false;
+    if not esta_llena(q) then
+    begin
+        q.fondo := q.fondo +1;
+        q.elemento_cola[q.fondo] := e;
+        agregar_elemento := true;
+    end;
+end;
+{--------------------}
+function ver_frente(var e:tipo_elemento; var q:cola): boolean;
+begin
+    ver_frente := false;
+    if not esta_vacia(q) then
+    begin
+        e          := q.elemento_cola[q.frente];
+        ver_frente := true;
+    end;
+end;
+{--------------------}
+function eliminar_frente(var q:cola):boolean;
+var
+    x: integer;
+begin
+    eliminar_frente := false;
+    if not esta_vacia(q) then
+    begin
+        for x:= 1 to q.fondo do
+            q.elemento_cola[x] := q.elemento_cola[x+1];
+        q.fondo         := q.fondo - 1;
+        eliminar_frente := true;
+    end;
+end;
+{--------------------}
+function sacar_elemento(var e:tipo_elemento; var q:cola): boolean;
+begin
+    sacar_elemento := false;
+    if ver_frente(e,q) then
+    begin
+        eliminar_frente(q);
+        sacar_elemento := true;
+    end;
+end;
+{--------------------}
+procedure destruir_cola(var q:cola);
+begin
+    crear_cola(q);
+end;
+
+
+{----------------------}
+{FUNCIONES DEL PROBLEMA}
+{----------------------}
+
+procedure carga_cola(minutos, frecuencia:word; var nro:word; var q:cola);
+var
+    x, y:word;
+begin
+    for x := 1 to minutos do
+        for y := 1 to frecuencia do
+        begin
+            nro := nro + 1;
+            agregar_elemento(nro, q);
+        end;
+end;
+
+{ Minutos sería el tiempo en minutos en que se efectua la carga 
+de la fila. Frecuencia sería los elementos que se cargan en
+cada minuto (en el ejemplo de la llegada de los aspirantes es
+un promedio de uno por minuto). En nro le asignamos un numero a cada
+aspirante para ir cargando a la cola. Cola es la cola elegida
+para realizar la carga}
+
+{------MAIN------}
+begin
+    {Creamos las colas de las dos oficinas y la cola general que
+    se forma en la entrada del instituto}
+    crear_cola(adm_A);
+    crear_cola(adm_B);
+    crear_cola(fila);
+    nro :=  0;
+    {Cargamos los aspirantes que llegaron de 7 a 8 en la cola general}
+    carga_cola(60, 1, nro, fila);
+    {Los madrugadores ya pueden ir haciendo fila en las oficinas}
+    {Recordemos que el máximo de la fila era 10}
+    for x := 1 to 10 do
+    begin
+        sacar_elemento(asp, fila);
+        agregar_elemento(asp, adm_A);
+        sacar_elemento(asp, fila);
+        agregar_elemento(asp, adm_B);
+    end;
+    
+    {Este es el instante en donde las oficinas comienzan
+    a atender(8 am). El tiempo y los contadores comienzan en cero}
+    minutos := 0;
+    cont_A  := 0;
+    cont_B  := 0;
+    
+    repeat 
+    
+    
+    {Los empleados de las oficinas atienden hasta que no queden
+    más aspirantes en las colas correspondientes}    
+    until esta_vacia(adm_A) and esta_vacia(adm_B);
+    
+    
+    
+end.
