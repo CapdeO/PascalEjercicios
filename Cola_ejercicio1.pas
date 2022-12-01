@@ -155,12 +155,43 @@ begin
     cont_B  := 0;
     
     repeat 
-    
-    
+        minutos += 1;
+        
+        {Mientras sea antes de las 12 siguen llegando aspirantes a hacer fila}
+        if minutos <= 240 then
+        begin
+            carga_cola(1, 1, nro, fila);
+            ultimo := minutos;
+        end;
+        
+        {Cada dos minutos el Administrador A atiende un aspirante,
+        por lo tanto uno de la fila general se suma a la fila de la
+        oficina A}
+        if (minutos mod 2) = 0 then 
+        begin
+            if eliminar_frente(adm_A) then
+                cont_A += 1;
+            if sacar_elemento(asp, fila) then
+                agregar_elemento(asp, adm_A);
+        end;
+        
+        {Lo mismo pero cada tres minutos, para la cola de la oficina B}
+        if (minutos mod 3) = 0 then
+        begin
+            if eliminar_frente(adm_B) then
+                cont_B += 1;
+            if sacar_elemento(asp, fila) then 
+                agregar_elemento(asp, adm_B);
+        end;
+        
+        
     {Los empleados de las oficinas atienden hasta que no queden
     más aspirantes en las colas correspondientes}    
     until esta_vacia(adm_A) and esta_vacia(adm_B);
     
-    
-    
+    writeln('El empleado A atendió la cantidad de: ', cont_A);
+    writeln('El empleado B atendió la cantidad de: ', cont_B);
+    writeln('El operativo terminó a las ', 8 + minutos div 60:2, ':', minutos mod 60:2);
+    writeln('El último aspirante espero ', (minutos - ultimo) div 60:2, ':', (minutos - ultimo) mod 60:2);
+    readln();
 end.
