@@ -17,7 +17,7 @@ type
 {VARIABLES------------------------------------}
 var
     p: pila; 
-    opcion: word;
+    opcion, x, elemento: word;
     
 {FUNCIONES------------------------------------}
 procedure crear_pila(var q:pila);
@@ -92,6 +92,13 @@ begin
         writeln();
         writeln('PILA');
         writeln('-----------------------------');
+        for x := 1 to p.cima do
+        begin
+            write(p.elemento_pila[x]);
+            write(' - ');
+        end;
+        writeln();
+        writeln('-----------------------------');
         writeln('1- Apilar');
         writeln('2- Desapilar');
         writeln('3- Pila vacía');
@@ -107,6 +114,9 @@ begin
             1: 
             begin
                 writeln();
+                writeln('Ingrese elemento: ');
+                readln(elemento);
+                apilar(elemento, p);
             end;
             2:
             begin
@@ -142,4 +152,3 @@ end.
 
 
 
- 
