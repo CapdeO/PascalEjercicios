@@ -121,33 +121,38 @@ begin
             2:
             begin
                 writeln();
+                desapilar(p);
             end;
             3:
             begin
                 writeln();
+                writeln('Pila vacía --> ', esta_vacia(p));
             end;
             4:
             begin
                 writeln();
+                writeln('Pila llena --> ', esta_llena(p));
             end;
             5:
             begin
                 writeln();
+                writeln('La cantidad de elementos ahora es: ', p.cima);
             end;
             6:
             begin
                 writeln();
+                writeln('La cima es: ', p.elemento_pila[p.cima]);
             end;
             7:
             begin
                 writeln();
+                destruir_pila(p);
+                writeln('Pila destruida');
             end;
         end;
         
     until opcion = 0;
 end.
-
-
 
 
 
