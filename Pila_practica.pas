@@ -16,8 +16,8 @@ type
         
 {VARIABLES------------------------------------}
 var
-    p: pila; 
-    opcion, x, elemento: word;
+    p, r: pila; 
+    opcion, x, elemento: tipo_elemento;
     
 {FUNCIONES------------------------------------}
 procedure crear_pila(var q:pila);
@@ -65,16 +65,15 @@ begin
         desapilar := true;
     end;
 end;
-{----------------------}
-{En el caso que sea necesario sacar el elemento para agregarlo en otro lado}
-{Ejemplo de uso: if sacar_elemento(num, pilaB) then 
-                    apilar(num, pilaC);                 }
+{----------------------}                }
 function sacar_elemento(var e:tipo_elemento; var q:pila): boolean;
 begin
     sacar_elemento := false;
     if ver_cima(e,q) then
     begin
-        desapilar(q);
+        if sacar_elemento(e, p) then
+            apilar(e, r);
+        ENSEGUIDA VUELVO ....
         sacar_elemento := true;
     end;
 end;
@@ -88,25 +87,50 @@ end;
 
 begin
     crear_pila(p);
+    crear_pila(r);
     repeat 
         writeln();
-        writeln('PILA');
-        writeln('-----------------------------');
+        writeln('Pila A');
+        writeln('//------------------------------//');
+        write('//');
+        
         for x := 1 to p.cima do
         begin
+            write(' ');
             write(p.elemento_pila[x]);
-            write(' - ');
+            write(' ');
         end;
+        write('//');
         writeln();
-        writeln('-----------------------------');
-        writeln('1- Apilar');
-        writeln('2- Desapilar');
-        writeln('3- Pila vacía');
-        writeln('4- Pila llena');
-        writeln('5- Cantidad de elementos');
-        writeln('6- Mirar cima');
-        writeln('7- Eliminar pila');
-        writeln('0- Salir');
+        writeln('//------------------------------//');
+        
+        writeln();
+        writeln('Pila B');
+        writeln('//------------------------------//');
+        write('//');
+        
+        for x := 1 to r.cima do
+        begin
+            write(' ');
+            write(r.elemento_pila[x]);
+            write(' ');
+        end;
+        write('//');
+        writeln();
+        writeln('//------------------------------//');
+        
+        writeln();
+        writeln('    >> PILA A <<                      >> PILA B <<     ');
+        writeln();
+        writeln('1- Apilar                  //    8- Apilar         ');
+        writeln('2- Desapilar               //    9- Desapilar      ');
+        writeln('3- Pila vacía              //    10- Pila vacía    ');
+        writeln('4- Pila llena              //    11- Pila llena     ');
+        writeln('5- Cantidad de elementos   //    12- Cantidad de elementos');
+        writeln('6- Mirar cima              //    13- Mirar cima');
+        writeln('7- Eliminar pila           //    14- Eliminar pila');
+        writeln('77- Pasar de A a B         //    15- Pasar de B a A');
+        writeln('                  0- Salir');
         writeln();
         readln(opcion);
         
@@ -114,7 +138,7 @@ begin
             1: 
             begin
                 writeln();
-                writeln('Ingrese elemento: ');
+                writeln('Ingrese elemento para A: ');
                 readln(elemento);
                 apilar(elemento, p);
             end;
@@ -126,34 +150,74 @@ begin
             3:
             begin
                 writeln();
-                writeln('Pila vacía --> ', esta_vacia(p));
+                writeln('Pila A vacía --> ', esta_vacia(p));
             end;
             4:
             begin
                 writeln();
-                writeln('Pila llena --> ', esta_llena(p));
+                writeln('Pila A llena --> ', esta_llena(p));
             end;
             5:
             begin
                 writeln();
-                writeln('La cantidad de elementos ahora es: ', p.cima);
+                writeln('La cantidad de elementos de A es: ', p.cima);
             end;
             6:
             begin
                 writeln();
-                writeln('La cima es: ', p.elemento_pila[p.cima]);
+                writeln('La cima de A es: ', p.elemento_pila[p.cima]);
             end;
             7:
             begin
                 writeln();
                 destruir_pila(p);
-                writeln('Pila destruida');
+                writeln('Pila A destruida');
             end;
+            77:
+            begin
+                writeln();
+                sacar_elemento(p.elemento_pila[p.cima], p);
+            end;
+            8:
+            begin
+                writeln();
+                writeln('Ingrese elemento para B: ');
+                readln(elemento);
+                apilar(elemento, r);
+            end;
+            9:
+            begin
+                writeln();
+                desapilar(r);
+            end;
+            10:
+            begin
+                writeln();
+                writeln('Pila B vacía --> ', esta_vacia(r));
+            end;
+            11:
+            begin
+                writeln();
+                writeln('Pila B llena --> ', esta_llena(r));
+            end;
+            12:
+            begin
+                writeln();
+                writeln('La cantidad de elementos de B es: ', r.cima);
+            end;
+            13:
+            begin
+                writeln();
+                writeln('La cima de B es: ', r.elemento_pila[r.cima]);
+            end;
+            14:
+            begin
+                writeln();
+                destruir_pila(r);
+                writeln('Pila B destruida');
+            end;
+            
         end;
         
     until opcion = 0;
 end.
-
-
-
-
