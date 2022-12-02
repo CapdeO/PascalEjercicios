@@ -65,17 +65,18 @@ begin
         desapilar := true;
     end;
 end;
-{----------------------}                }
-function sacar_elemento(var e:tipo_elemento; var q:pila): boolean;
+{----------------------}
+procedure pasar_elemento(var q, s:pila);
+var
+    k: tipo_elemento;
 begin
-    sacar_elemento := false;
-    if ver_cima(e,q) then
+    if not esta_vacia(q) then
     begin
-        if sacar_elemento(e, p) then
-            apilar(e, r);
-        ENSEGUIDA VUELVO ....
-        sacar_elemento := true;
+       k := q.elemento_pila[q.cima];
+       q.cima -= 1;
+       apilar(k, s); 
     end;
+     
 end;
 {----------------------}
 procedure destruir_pila(var q:pila);
@@ -176,7 +177,7 @@ begin
             77:
             begin
                 writeln();
-                sacar_elemento(p.elemento_pila[p.cima], p);
+                pasar_elemento(p, r);
             end;
             8:
             begin
@@ -216,8 +217,14 @@ begin
                 destruir_pila(r);
                 writeln('Pila B destruida');
             end;
+            15:
+            begin
+                writeln();
+                pasar_elemento(r, p);
+            end;
             
         end;
         
     until opcion = 0;
 end.
+
