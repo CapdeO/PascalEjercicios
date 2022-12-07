@@ -21,7 +21,7 @@ listaA: lista;
 
 {FUNCIONES--------------------------------------}
 
-procedure imprimirSumaPromedio();
+procedure imprimirSumaPromedio(lista: lista);
 begin
     
 end;
@@ -33,19 +33,25 @@ begin
         if listaA.ultimo > 0 then
         begin
             writeln();
-            writeln('Lista');
-            writeln('-------------------');
+            writeln('LISTA -- Cantidad de elementos:', listaA.ultimo);
+            writeln('------------------------------------------------');
             for x := 1 to listaA.ultimo do
             begin
                 write(listaA.elemento_lista[x], ' - ');
             end;
+            
         end;
         writeln();
         writeln('Ingrese un entero o 0 para terminar:');
         readln(dato);
-        listaA.ultimo += 1;
-        listaA.elemento_lista[listaA.ultimo] := dato;
+        if listaA.ultimo < 15 then
+        begin
+            listaA.ultimo += 1;
+            listaA.elemento_lista[listaA.ultimo] := dato;
+        end;
+        
         
         
     until dato= 0;
+    
 end.
