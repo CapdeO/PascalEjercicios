@@ -79,8 +79,11 @@ begin
         for x := 1 to cima - 1 do
         begin
             write(pacientes[x].nroHist, '         ', pacientes[x].apellido, '         ', pacientes[x].fechaVisita.dd, '/', pacientes[x].fechaVisita.mm, '/',pacientes[x].fechaVisita.aa, '        ', pacientes[x].privado, '          ', pacientes[x].alergias, '           ', pacientes[x].observaciones);
+            writeln();
         end;
     end;
+    writeln();
+    
     
 end;
 
