@@ -32,14 +32,17 @@ conjuntoPacientes = array[1..10] of paciente;
     
 var
 
-opcion, cima: word;
-pacientes: conjuntoPacientes;
+opcion, cima, cima2: word;
+pacientes, auxiliar: conjuntoPacientes;
 
 
 
 {FUNCTION------------------------------------------------------------}
 
 procedure leer_paciente();
+var
+    x: word;
+    sonIguales: boolean;
 begin
     writeln('Ingrese número de historia clínica:');
     readln(pacientes[cima].nroHist);
@@ -58,6 +61,29 @@ begin
     readln(pacientes[cima].alergias);
     writeln('Observaciones:');
     readln(pacientes[cima].observaciones);
+    
+    
+    sonIguales := false;
+    
+    for x := 1 to cima2 do 
+    begin
+        if pacientes[cima].nroHist = auxiliar[x].nroHist then
+        begin
+            auxiliar[x].observaciones := pacientes[cima].observaciones;
+            sonIguales := true;
+        end;
+    end;
+    
+    if sonIguales = false then
+    begin
+        auxiliar[cima2].nroHist := pacientes[cima].nroHist;
+        auxiliar[cima2].apellido := pacientes[cima].apellido;
+        auxiliar[cima2].privado := pacientes[cima].privado;
+        auxiliar[cima2].alergias := pacientes[cima].alergias;
+        auxiliar[cima2].observaciones := pacientes[cima].observaciones;
+        cima2 += 1;
+    end;
+    
 end;
 
 procedure mostrar_tabla(t: conjuntoPacientes);
@@ -87,19 +113,67 @@ begin
     
 end;
 
+procedure mostrarObs();
+var 
+    x, opcion: word;
+begin
+    writeln();
+    writeln('Seleccione un paciente según número:');
+    writeln();
+    writeln('Nro - Apellido');
+    for x := 1 to cima2 - 1 do
+    begin
+        writeln();
+        write(x, '   - ', auxiliar[x].apellido);
+    end;
+    writeln();
+    readln(opcion);
+    writeln('Observaciones de la última visita de ', auxiliar[x].apellido, ': ', auxiliar[opcion].observaciones);
+    writeln();
+end;
+
+procedure listarAlergias();
+var
+    x: word;
+begin
+    writeln();
+    writeln('Pacientes con alergias:');
+    for x := 1 to cima2 - 1 do
+    begin
+        if auxiliar[x].alergias = 'si' then
+            writeln(auxiliar[x].apellido);
+    end;
+    writeln();
+end;
+
+procedure listarPrivados();
+var
+    x: word;
+begin
+    writeln();
+    writeln('Pacientes privados:');
+    for x := 1 to cima2 - 1 do
+    begin
+        if auxiliar[x].privado = 'si' then
+            writeln(auxiliar[x].apellido);
+    end;
+    writeln();
+end;
+
     
 {MAIN----------------------------------------------------------------}
 
 begin
     
-    cima := 1;
+    cima  := 1;
+    cima2 := 1;
     repeat 
         writeln();
-        writeln('-------------------------------------------- ');
-        writeln('----------- Sistema de Pacientes ----------- ');
-        writeln('-------------------------------------------- ');
+        writeln('-------------------------------------------------------------------- ');
+        writeln('----------------------- Sistema de Pacientes ----------------------- ');
+        writeln('-------------------------------------------------------------------- ');
         writeln('1 -      Introducir nuevo registro');
-        writeln('2 -      Mostrar tabla de pacientes');
+        writeln('2 -      Mostrar todos los registros');
         writeln('3 -      Ver observaciones de última visita');
         writeln('4 -      Listar pacientes con alergias');
         writeln('5 -      Listar pacientes privados');
@@ -119,15 +193,15 @@ begin
         end;
         3: 
         begin
-            
+            mostrarObs();
         end;
         4: 
         begin
-            
+            listarAlergias();
         end;
         5: 
         begin
-            
+            listarPrivados();
         end;
         
         end; {Fin del case of}
