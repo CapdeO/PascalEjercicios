@@ -1,8 +1,0 @@
-1- Escribir un programa que ingrese una frase y sustituir todas las secuencias de dos o más espacios por un sólo espacio. Visualizar la frase obtenida.
-2- Realizar una función que convierta un string de entrada a otro de salida con la siguiente premisa: cambiar la primera letra de cada palabra a mayúscula.
-3- Escibir un programa que calcule la frecuencia de aparición de cada vocal de un texto proporcionado por el usuario. Esta solución se debe presentar en forma de histograma. Nota: no distingue entre mayúscula y minúscula.
-a 7 *******
-e 3 ***
-i 1 *
-o 0
-u 1 *
