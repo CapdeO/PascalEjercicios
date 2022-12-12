@@ -206,22 +206,9 @@ begin
         
         end; {Fin del case of}
         
-        
-        
-        
-        
-        
-        
+         
     until opcion = 0;
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
+   
     
 end.
