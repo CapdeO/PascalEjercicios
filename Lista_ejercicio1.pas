@@ -8,7 +8,7 @@ program ListaSumaPromedio;
 type
 lista = record
         elemento_lista: array[0..15] of word;
-        ultimo, suma, promedio: word;
+        ultimo: word;
     end;
     
 
@@ -21,9 +21,20 @@ listaA: lista;
 
 {FUNCIONES--------------------------------------}
 
-procedure imprimirSumaPromedio(lista: lista);
+procedure imprimirSumaPromedio(q: lista);
+var
+    suma, x: word;
+    promedio: single;
 begin
-    
+    suma     := 0;
+    promedio := 0;
+    for x := 1 to q.ultimo  do
+    begin
+        suma := suma + q.elemento_lista[x];
+    end;
+    promedio := suma / (q.ultimo - 1);
+    writeln('La suma de los elementos de la lista es ', suma);
+    writeln('El promedio de los elementos de la lista es ', promedio:8:1);
 end;
 
 {MAIN-------------------------------------------}
@@ -53,5 +64,7 @@ begin
         
         
     until dato= 0;
-    
+    imprimirSumaPromedio(listaA);
+    readln();
+     
 end.
